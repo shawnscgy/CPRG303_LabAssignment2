@@ -1,6 +1,6 @@
 import React from "react";
 import { 
-    View, TextInput, Button, StyleSheet
+    View, TextInput, Button, StyleSheet, Text
 } from "react-native";
 
 type ToDoFormProps = {
@@ -9,12 +9,17 @@ type ToDoFormProps = {
 }
 function ToDoForm(props : ToDoFormProps) : React.JSX.Element {
       const [inputText, setInputText] = React.useState("");
+      const [warning, setWarning] = React.useState("");
       function handleSetInputText(newText : string) {
         setInputText(newText);
+        if (warning !== "") {
+          setWarning("");
+        }
       }
     
       function generateNewItem(newText : string) {
         if (newText === "") {
+          setWarning("What are u doing bro?");
           return;
         }
         const newItem = {id : (props.tasks.length+1), text : newText, completed : false};
@@ -31,6 +36,9 @@ function ToDoForm(props : ToDoFormProps) : React.JSX.Element {
               value={inputText}
             />
             <Button title="Add" onPress={() => generateNewItem(inputText)} />
+            <View style={styles.warningTxt}>
+              {warning? <Text>{warning}</Text> : null}
+            </View>
           </View>
       );
       
@@ -51,5 +59,14 @@ const styles = StyleSheet.create({
       paddingVertical: 5,
       marginRight: 10,
     },
+    warningTxt: {
+      width: '80%',
+      backgroundColor: 'red',
+      color: 'white',
+      position: 'absolute',
+      top: 50,
+      left: 20,
+      alignItems: 'center',
+    }
   });
   export default ToDoForm;
