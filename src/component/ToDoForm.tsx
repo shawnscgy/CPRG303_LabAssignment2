@@ -14,6 +14,9 @@ function ToDoForm(props : ToDoFormProps) : React.JSX.Element {
       }
     
       function generateNewItem(newText : string) {
+        if (newText === "") {
+          return;
+        }
         const newItem = {id : (props.tasks.length+1), text : newText, completed : false};
         setInputText("");
         props.addTask(newItem);
