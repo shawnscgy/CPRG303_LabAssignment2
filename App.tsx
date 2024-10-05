@@ -7,14 +7,6 @@
 import React from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
-  Pressable,
-  View,
-  Text,
-  ScrollView,
-  TextInput,
-  Button,
-  FlatList,
 } from 'react-native';
 import ToDoForm from './src/component/ToDoForm';
 import ToDoList from './src/component/ToDoList';
@@ -33,7 +25,6 @@ function App() {
   }
   function addTask(newItem : itemType) {
     setTasks([...tasks, newItem]);
-    
   }
   function isCompleted(id: number) {
     const task = tasks.find((task) => task.id === id);
