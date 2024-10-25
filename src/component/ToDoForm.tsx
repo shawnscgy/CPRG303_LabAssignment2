@@ -8,10 +8,10 @@ type ToDoFormProps = {
     addTask : (newItem : {id : number, text : string, completed : boolean}) => void;
 }
 function ToDoForm(props : ToDoFormProps) : React.JSX.Element {
-      const [inputText, setInputText] = React.useState("");
+      const [taskText, setTaskText] = React.useState("");
       const [warning, setWarning] = React.useState("");
       function handleSetInputText(newText : string) {
-        setInputText(newText);
+        setTaskText(newText);
         if (warning !== "") {
           setWarning("");
         }
@@ -22,8 +22,12 @@ function ToDoForm(props : ToDoFormProps) : React.JSX.Element {
           setWarning("What are u doing bro?");
           return;
         }
+        if (props.tasks.find((task) => task.text === newText)) {
+          setWarning("Human Clone is forbidden bro! \nHappy Halloween!");
+          return;
+        }
         const newItem = {id : (props.tasks.length+1), text : newText, completed : false};
-        setInputText("");
+        setTaskText("");
         props.addTask(newItem);
       }
       
@@ -33,9 +37,9 @@ function ToDoForm(props : ToDoFormProps) : React.JSX.Element {
               style={styles.input}
               placeholder="Add a new task..."
               onChangeText={handleSetInputText}
-              value={inputText}
+              value={taskText}
             />
-            <Button title="Add" onPress={() => generateNewItem(inputText)} />
+            <Button title="Add Task" onPress={() => generateNewItem(taskText)} />
             <View style={styles.warningTxt}>
               {warning? <Text>{warning}</Text> : null}
             </View>

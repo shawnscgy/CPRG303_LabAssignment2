@@ -7,9 +7,11 @@ type ToDoListProps = {
     isCompleted : (id : number) => void;
 }
 function ToDoList(props : ToDoListProps) : React.JSX.Element {
-    function passIsCompleted(id: number) {
+    
+  function passIsCompleted(id: number) {
         return props.isCompleted(id);
     }
+    
     return (
         <FlatList
             data={props.tasks}

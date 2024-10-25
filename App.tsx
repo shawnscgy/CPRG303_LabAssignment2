@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import ToDoForm from './src/component/ToDoForm';
 import ToDoList from './src/component/ToDoList';
+import ClearBtn from './src/component/ClearBtn';
 
 function App() {
   const [tasks, setTasks] = React.useState([
@@ -23,8 +24,8 @@ function App() {
     text : string;
     completed : boolean; 
   }
-  function addTask(newItem : itemType) {
-    setTasks([...tasks, newItem]);
+  function addTask(taskText : itemType) {
+    setTasks([...tasks, taskText]);
   }
   function isCompleted(id: number) {
     const task = tasks.find((task) => task.id === id);
@@ -39,6 +40,7 @@ function App() {
     <SafeAreaView>
       <ToDoList tasks={tasks} isCompleted={isCompleted}/>
       <ToDoForm tasks={tasks} addTask={addTask}/>
+      <ClearBtn tasks={tasks} setTasks={setTasks}/>
     </SafeAreaView>
   );
 }
